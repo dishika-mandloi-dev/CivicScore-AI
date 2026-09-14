@@ -10,14 +10,15 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import LoginPage from '@/components/LoginPage';
 import AdminDashboard from '@/components/admin/AdminDashboard';
+import UserDashboard from '@/components/UserDashboard';
 
-type Route = 'home' | 'login' | 'admin';
+type Route = 'home' | 'login' | 'admin' | 'user';
 
 export default function App() {
   const [route, setRoute] = useState<Route>('home');
 
   useEffect(() => {
-    if (route === 'login' || route === 'admin') {
+    if (route !== 'home') {
       window.scrollTo({ top: 0 });
     }
   }, [route]);
@@ -56,7 +57,8 @@ export default function App() {
           >
             <LoginPage
               onBack={() => setRoute('home')}
-              onLogin={() => setRoute('admin')}
+              onAdminLogin={() => setRoute('admin')}
+              onUserLogin={() => setRoute('user')}
             />
           </motion.div>
         )}
@@ -70,6 +72,18 @@ export default function App() {
             transition={{ duration: 0.3 }}
           >
             <AdminDashboard onLogout={() => setRoute('login')} />
+          </motion.div>
+        )}
+
+        {route === 'user' && (
+          <motion.div
+            key="user"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <UserDashboard onLogout={() => setRoute('login')} onBack={() => setRoute('home')} />
           </motion.div>
         )}
       </AnimatePresence>

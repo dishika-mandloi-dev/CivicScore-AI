@@ -4,6 +4,19 @@
 // is claimed to be official IMC data unless a verified dataset is plugged in.
 
 // ---------------------------------------------------------------------------
+// Admin page identifiers (shared across admin components)
+// ---------------------------------------------------------------------------
+export type AdminPage =
+  | 'dashboard'
+  | 'complaints'
+  | 'wards'
+  | 'ward-detail'
+  | 'health-score'
+  | 'ai-insights'
+  | 'map'
+  | 'notifications';
+
+// ---------------------------------------------------------------------------
 // Health-score weights (project-defined)
 // ---------------------------------------------------------------------------
 export const SCORE_WEIGHTS = {

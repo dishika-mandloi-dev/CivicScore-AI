@@ -14,16 +14,9 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
 } from 'lucide-react';
+import { type AdminPage } from '@/lib/adminData';
 
-export type AdminPage =
-  | 'dashboard'
-  | 'complaints'
-  | 'wards'
-  | 'ward-detail'
-  | 'health-score'
-  | 'ai-insights'
-  | 'map'
-  | 'notifications';
+export type { AdminPage };
 
 interface NavItem {
   id: AdminPage;
