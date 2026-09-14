@@ -13,9 +13,10 @@ import {
   UserPlus,
   LayoutDashboard,
   Shield,
+  MapPin,
 } from 'lucide-react';
 import { RAJWADA_LOGIN } from '@/lib/assets';
-import { ADMIN_CREDENTIALS } from '@/lib/adminData';
+import { ADMIN_CREDENTIALS, WARDS } from '@/lib/adminData';
 import { supabase } from '@/lib/supabase';
 
 type Role = 'admin' | 'user';
@@ -41,6 +42,7 @@ export default function LoginPage({
   const [email, setEmail] = useState('');
   const [confirmPwd, setConfirmPwd] = useState('');
   const [fullName, setFullName] = useState('');
+  const [wardId, setWardId] = useState<string>('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -53,6 +55,7 @@ export default function LoginPage({
     setEmail('');
     setConfirmPwd('');
     setFullName('');
+    setWardId('');
   };
 
   // ---- Admin submit (unchanged logic) ----
@@ -98,11 +101,15 @@ export default function LoginPage({
       setError('Password must be at least 6 characters.');
       return;
     }
+    if (!wardId) {
+      setError('Please select the ward you live in.');
+      return;
+    }
     setLoading(true);
     const { data, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: fullName } },
+      options: { data: { full_name: fullName, ward_id: parseInt(wardId, 10) } },
     });
     setLoading(false);
     if (signUpError || !data.user) {
@@ -413,6 +420,26 @@ export default function LoginPage({
                       placeholder="Re-enter your password"
                       className="w-full rounded-xl border border-gray-300 bg-gray-50 py-3.5 pl-11 pr-4 text-sm text-gray-900 outline-none transition-all placeholder:text-gray-400 focus:border-emerald-400 focus:bg-white focus:ring-2 focus:ring-emerald-400/30"
                     />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-gray-700">Which Ward do you live in?</label>
+                  <div className="group relative">
+                    <MapPin className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400 transition-colors group-focus-within:text-emerald-500" />
+                    <select
+                      required
+                      value={wardId}
+                      onChange={(e) => setWardId(e.target.value)}
+                      className="w-full rounded-xl border border-gray-300 bg-gray-50 py-3.5 pl-11 pr-4 text-sm text-gray-900 outline-none transition-all focus:border-emerald-400 focus:bg-white focus:ring-2 focus:ring-emerald-400/20"
+                    >
+                      <option value="">Select your ward</option>
+                      {WARDS.map((w) => (
+                        <option key={w.id} value={w.id}>
+                          Ward {String(w.id).padStart(2, '0')} — {w.wardName}, {w.zone}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
