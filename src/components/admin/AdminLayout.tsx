@@ -13,6 +13,7 @@ import {
   X,
   PanelLeftClose,
   PanelLeftOpen,
+  ClipboardList,
 } from 'lucide-react';
 import { type AdminPage } from '@/lib/adminData';
 
@@ -32,6 +33,7 @@ const NAV_ITEMS: NavItem[] = [
   { id: 'ai-insights', label: 'AI Insights', icon: Sparkles },
   { id: 'map', label: 'Map & Wards', icon: Map },
   { id: 'notifications', label: 'Notifications', icon: Bell },
+  { id: 'survey-responses', label: 'Survey Responses', icon: ClipboardList },
 ];
 
 export default function AdminLayout({

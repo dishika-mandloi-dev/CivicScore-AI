@@ -1,0 +1,2 @@
+[functions.admin-survey-responses]
+verify_jwt = false

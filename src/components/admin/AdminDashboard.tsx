@@ -8,6 +8,7 @@ import HealthScorePage from './pages/HealthScorePage';
 import AIInsightsPage from './pages/AIInsightsPage';
 import MapWardsPage from './pages/MapWardsPage';
 import NotificationsPage from './pages/NotificationsPage';
+import SurveyResponsesPage from './pages/SurveyResponsesPage';
 import { INITIAL_NOTIFICATIONS } from '@/lib/adminData';
 
 export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
@@ -47,6 +48,8 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
         return <MapWardsPage onNavigate={handleNavigate} />;
       case 'notifications':
         return <NotificationsPage onNavigate={handleNavigate} />;
+      case 'survey-responses':
+        return <SurveyResponsesPage />;
     }
   };
 

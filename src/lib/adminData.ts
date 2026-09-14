@@ -14,7 +14,8 @@ export type AdminPage =
   | 'health-score'
   | 'ai-insights'
   | 'map'
-  | 'notifications';
+  | 'notifications'
+  | 'survey-responses';
 
 // ---------------------------------------------------------------------------
 // Health-score weights (project-defined)
